@@ -8,7 +8,7 @@ public class Pickup : MonoBehaviour
 
     void Update() // Runs every frame
     {
-        if (inRange && Input.GetKeyDown("e")) // Checks that they player is in range and presses the input
+        if (inRange == true && Input.GetKeyDown("e")) // Checks that they player is in range and presses the input
         {
             Debug.Log("Picked up"); // Confirms in Unity that the script ran correctly
             Destroy(gameObject); // Removes the object from the game world so it doesn't duplicate
