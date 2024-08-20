@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -22,6 +25,17 @@ namespace StarterAssets
 		public float SpeedChangeRate = 10.0f;
 
 		[Space(10)]
+		//public float DashForce;
+		//public float DashUpwardForce;
+		//public float DashDuration;
+		//public float DashCd;
+		//float DashCdTimer;
+		//public float DashSpeed;
+		//public float DashTime;
+		//public float CooldownTime;
+		//public bool Dashed = false;
+
+        [Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -67,6 +81,7 @@ namespace StarterAssets
 	
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
+		//private Rigidbody rb;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -108,6 +123,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			//rb = GetComponent<Rigidbody>();
 		}
 
 		private void Update()
@@ -115,7 +132,45 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			//Dash();
 		}
+
+		//void Dash()
+		//{
+		//	Vector3 ForceToApply = (Orientation.forward * DashForce) + (Orientation.up * DashUpwardForce);
+
+		//	rb.AddForce(ForceToApply, ForceMode.Impulse);
+		//}
+
+		//void ResetDash()
+		//{
+
+		//}
+		//{
+		//	if (Input.GetKeyDown("q") && Dashed == false)
+		//	{
+		//		StartCoroutine(Dashing());
+		//		Invoke(nameof(DashCooldown), CooldownTime);
+		//	}
+		//}
+
+		//IEnumerator Dashing()
+		//{
+		//	float StartTime = Time.time;
+
+		//	while(Time.time < StartTime + DashTime)
+		//	{
+		//		transform.Translate(Vector3.forward * DashSpeed);
+		//		Dashed = true;
+
+		//		yield return null;
+		//	}
+		//}
+
+		//void DashCooldown()
+		//{
+		//	Dashed = false;
+		//}
 
 		private void LateUpdate()
 		{
