@@ -7,6 +7,6 @@ public class LoadScene : MonoBehaviour
 {
     public void load() //Variable for the scene loading
     {
-        SceneManager.LoadScene("Playground"); //Loads the main game scene
+        SceneManager.LoadScene("Main Scene"); //Loads the main game scene
     }
 }
