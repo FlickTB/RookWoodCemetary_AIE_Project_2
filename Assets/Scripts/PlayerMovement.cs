@@ -17,10 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public float airMultiplier;                                                                                             //Variable for how being in the air affects movement speed
     bool readyToJump;                                                                                                       //Variable for when the player is able to jump
 
-    [Header("Crouching")]
-    public float crouchSpeed;
-    public float crouchYScale;
-    float startYScale;
+    [Header("Crouching")]                                                                                                   //Title for usage in Unity
+    public float crouchSpeed;                                                                                               //Variable for crouch speed
+    public float crouchYScale;                                                                                              //Variable for performing the crouch
+    float startYScale;                                                                                                      //Variable for storing the starting player height
 
     [Header("Keydinds")]                                                                                                    //Title for usage in Unity
     public KeyCode jumpKey = KeyCode.Space;                                                                                 //The input to jump
