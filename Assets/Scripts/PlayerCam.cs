@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    public float sensX;
-    public float sensY;
+    public float sensX;                                                                                                     //A varible for mouse sensitivity
+    public float sensY;                                                                                                     //A varible for mouse sensitivity
 
-    public Transform orientation;
+    public Transform orientation;                                                                                           //A refernce for where the player is supposed to be looking
 
-    float xRotation;
-    float yRotation;
+    float xRotation;                                                                                                        //A varible for the camera movement
+    float yRotation;                                                                                                        //A varible for the camera movement
 
-    private void Start()
+    private void Start()                                                                                                    //Function is called at the start of the scene
     {
         Cursor.lockState = CursorLockMode.Locked;                                                                           //Locks the camera to follow the mouse
         Cursor.visible = false;                                                                                             //Hides the cursor
     }
 
-    private void Update()
+    private void Update()                                                                                                   //Function is called every frame
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;                                                //Get mouse inputs for the X axis
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;                                                //Get mouse inputs for the Y axis
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;                                                //Get mouse inputs for the X axis for a period of time
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;                                                //Get mouse inputs for the Y axis for a period of time
 
-        yRotation += mouseX;
-        xRotation -= mouseY;
+        yRotation += mouseX;                                                                                                //Sets the variable to align with mouse movement
+        xRotation -= mouseY;                                                                                                //Sets the variable to align with mouse movement
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);                                                                      //Limits how far the player can look up & down
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);                                                     //Rotates the camera on the X axis
