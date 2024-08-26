@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;                                                                                                 //Variable for the walk speed
     public float sprintSpeed;                                                                                               //Variable for the sprint speed
 
+    public float dashSpeed;
+    public float dashSpeedChangeFactor;
+
+    public float maxYSpeed;
+
     public float groundDrag;                                                                                                //Variable for how much the ground slows down the player
 
     [Header("Jumping")]                                                                                                     //Title for usage in Unity
@@ -40,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;                                                                                           //A reference for the direction the player is facing
 
     float horizontalInput;                                                                                                  //Variable for the player's movement
-    float verticalInput;                                                                                                    //Variable for the player's move
+    float verticalInput;                                                                                                    //Variable for the player's movement
 
     Vector3 moveDirection;                                                                                                  //Variable for the direction the player is moving
 
@@ -53,8 +58,11 @@ public class PlayerMovement : MonoBehaviour
         walking,                                                                                                            //Variable for the walk state
         sprinting,                                                                                                          //Variable for the sprint state
         crouching,                                                                                                          //Variable for the crouching state
+        dashing,
         air                                                                                                                 //Variable for the air state
     }
+
+    public bool dashing;
 
     private void Start()                                                                                                    //Function called on the first frame
     {
@@ -72,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         SpeedControl();                                                                                                     //Calling on another function
         StateHandler();                                                                                                     //Calling on another function
 
-        if (grounded)                                                                                                       //Checks the player is on the ground
+        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching)         //Checks the player is on the ground
         {
             rb.drag = groundDrag;                                                                                           //Determines what drag is
         }    
@@ -109,31 +117,100 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    float desiredMoveSpeed;
+    float lastDesiredMoveSpeed;
+    MovementState lastState;
+    bool keepMomentum;
+
     void StateHandler()                                                                                                     //Function that manages the different movement states
     {
-        if(Input.GetKey(crouchKey))                                                                                         //If the player wants to crouch
+        if(dashing)
+        {
+            state = MovementState.dashing;
+            desiredMoveSpeed = dashSpeed;
+            speedChangeFactor = dashSpeedChangeFactor;
+        }
+        else if(Input.GetKey(crouchKey))                                                                                    //If the player wants to crouch
         {
             state = MovementState.crouching;                                                                                //Changes the movement state to crouching
-            moveSpeed = crouchSpeed;                                                                                        //Changes the movement speed to crouching
+            desiredMoveSpeed = crouchSpeed;                                                                                 //Changes the movement speed to crouching
         }
-        if(grounded && Input.GetKey(sprintKey))                                                                             //If the player wants to sprint
+        else if(grounded && Input.GetKey(sprintKey))                                                                        //If the player wants to sprint
         {
             state = MovementState.sprinting;                                                                                //Changes the movement state to sprinting
-            moveSpeed = sprintSpeed;                                                                                        //Changes the movement speed to sprinting
+            desiredMoveSpeed = sprintSpeed;                                                                                 //Changes the movement speed to sprinting
         }
         else if(grounded)                                                                                                   //Otherwise the player is walking when on the ground
         {
             state = MovementState.walking;                                                                                  //Changes the movement state to walking
-            moveSpeed = walkSpeed;                                                                                          //Changes the movement speed to walking
+            desiredMoveSpeed = walkSpeed;                                                                                   //Changes the movement speed to walking
         }
         else                                                                                                                //Otherwise the player is in the air
         {
             state = MovementState.air;                                                                                      //Changes the movement state to air
+            
+            if(desiredMoveSpeed < sprintSpeed)
+            {
+                desiredMoveSpeed = walkSpeed;
+            }
+            else
+            {
+                desiredMoveSpeed = sprintSpeed;
+            }
         }
+
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
+        if(lastState == MovementState.dashing)
+        {
+            keepMomentum = true;
+        }
+
+        if(desiredMoveSpeedHasChanged)
+        {
+            if(keepMomentum)
+            {
+                StopAllCoroutines();
+                StartCoroutine(SmoothlyLerpMoveSpeed());
+            }
+            else
+            {
+                StopAllCoroutines();
+                moveSpeed = desiredMoveSpeed;
+            }
+        }
+        lastDesiredMoveSpeed = desiredMoveSpeed;
+        lastState = state;
+    }
+
+    float speedChangeFactor;
+
+    IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        float time = 0;
+        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+        float startValue = moveSpeed;
+
+        float boostFactor = speedChangeFactor;
+
+        while (time < difference)
+        {
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+            time += Time.deltaTime * boostFactor;
+            yield return null;
+        }
+
+        moveSpeed = desiredMoveSpeed;
+        speedChangeFactor = 1f;
+        keepMomentum = false;
     }
 
     void MovePlayer()                                                                                                       //Function for player's movement
     {
+        if(state == MovementState.dashing)
+        {
+            return;
+        }
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;                          //Determines how the player moves foward 
 
         if(OnSlope() && !exitingSlope)                                                                                      //When the player is on a slope
@@ -175,6 +252,10 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;                                                        //Defines the variable for the maximum speed
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);                                       //Calls on variable for the maximum speed
             }
+        }
+        if(maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
         }
     }
 

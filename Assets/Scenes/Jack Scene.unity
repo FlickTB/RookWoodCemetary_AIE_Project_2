@@ -705,6 +705,7 @@ GameObject:
   - component: {fileID: 930004164}
   - component: {fileID: 930004165}
   - component: {fileID: 930004166}
+  - component: {fileID: 930004167}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -760,6 +761,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
+  dashSpeed: 20
+  dashSpeedChangeFactor: 50
+  maxYSpeed: 20
   groundDrag: 5
   jumpForce: 12
   jumpCooldown: 0.25
@@ -776,6 +780,32 @@ MonoBehaviour:
   maxSlopeAngle: 69
   orientation: {fileID: 1314005}
   state: 0
+  dashing: 0
+--- !u!114 &930004167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930004160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc48d450c784e04b9ca2d2630591dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 1314005}
+  playerCam: {fileID: 254149454}
+  dashForce: 20
+  dashUpwardForce: 0
+  maxDashYSpeed: 20
+  dashDuration: 0.5
+  cam: {fileID: 254149456}
+  dashFov: 100
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 0
+  dashCd: 1.5
+  dashKey: 101
 --- !u!1 &1204674236
 GameObject:
   m_ObjectHideFlags: 0
