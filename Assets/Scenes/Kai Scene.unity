@@ -6552,6 +6552,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 5736480916478740173, guid: 26f0ce32c072ffc438b0ea9c262bd8ae,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6295147688319137281, guid: 26f0ce32c072ffc438b0ea9c262bd8ae,
         type: 3}
       propertyPath: m_Enabled

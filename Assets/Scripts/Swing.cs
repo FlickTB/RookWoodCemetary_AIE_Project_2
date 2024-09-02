@@ -9,9 +9,10 @@ public class Swing : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             animator.SetBool("Swing", true);
+            GetComponent<MeshCollider>().enabled = true;
 
             Invoke(nameof(Cooldown), 1f);
         }
@@ -20,5 +21,6 @@ public class Swing : MonoBehaviour
     void Cooldown()
     {
         animator.SetBool("Swing", false);
+        GetComponent<MeshCollider>().enabled = false;
     }
 }
