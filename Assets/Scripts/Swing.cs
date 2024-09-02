@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Swing : MonoBehaviour
 {
-
     [SerializeField] private Animator animator;
 
     void Update()
