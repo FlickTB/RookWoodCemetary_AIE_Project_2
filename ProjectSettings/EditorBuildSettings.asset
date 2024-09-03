@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Build Levels/MainMenu.unity
     guid: ce8499c28ac06774a94895f3345ed500
   - enabled: 0
     path: Assets/Scenes/Jack Scene.unity
     guid: 99c81ca98da233b4dbfe179182e854bc
   - enabled: 0
-    path: Assets/Scenes/Main Scene.unity
+    path: Assets/Scenes/Build Levels/Level 1.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   - enabled: 1
     path: Assets/Scenes/Kai Scene.unity

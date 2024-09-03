@@ -55,12 +55,17 @@ public class PlayerMovement : MonoBehaviour
 
     public enum MovementState                                                                                               //The list of movement options
     {
+        freeze,
         walking,                                                                                                            //Variable for the walk state
         sprinting,                                                                                                          //Variable for the sprint state
         crouching,                                                                                                          //Variable for the crouching state
         dashing,
         air                                                                                                                 //Variable for the air state
     }
+
+    public bool freeze;
+
+    public bool activeGrapple;
 
     public bool dashing;
 
@@ -124,7 +129,13 @@ public class PlayerMovement : MonoBehaviour
 
     void StateHandler()                                                                                                     //Function that manages the different movement states
     {
-        if(dashing)
+        if (freeze)
+        {
+            state = MovementState.freeze;
+            moveSpeed = 0;
+            rb.velocity = Vector3.zero;
+        }
+        else if(dashing)
         {
             state = MovementState.dashing;
             desiredMoveSpeed = dashSpeed;
@@ -206,6 +217,10 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()                                                                                                       //Function for player's movement
     {
+        if(activeGrapple)
+        {
+            return;
+        }
         if(state == MovementState.dashing)
         {
             return;
@@ -236,6 +251,10 @@ public class PlayerMovement : MonoBehaviour
 
     void SpeedControl()                                                                                                     //Function for setting the maximum speed of the player
     {
+        if(activeGrapple)
+        {
+            return;
+        }
         if(OnSlope() && !exitingSlope)                                                                                      //If they are on a slope
         {
             if(rb.velocity.magnitude > moveSpeed)                                                                           //If they are going faster than the movement speed
@@ -272,6 +291,20 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = false;                                                                                               //On a slope
     }
 
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    {
+        activeGrapple = true;
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+        Invoke(nameof(SetVelocity), 0.1f);
+    }
+
+    Vector3 velocityToSet;
+    
+    void SetVelocity()
+    {
+        rb.velocity = velocityToSet;
+    }
+
     bool OnSlope()                                                                                                          //Function for being on a slope
     {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))                     //If they are on a slope
@@ -286,5 +319,19 @@ public class PlayerMovement : MonoBehaviour
     Vector3 GetSlopeMoveDirection()                                                                                         //Function that gets the direction the player is moveing on a slope
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;                                           //Keeps the player moving correctly
+    }
+
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    {
+        float gravity = Physics.gravity.y;
+        float displacementY = endPoint.y = startPoint.y;
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) 
+                           + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+        return velocityXZ + velocityY;
+
     }
 }
