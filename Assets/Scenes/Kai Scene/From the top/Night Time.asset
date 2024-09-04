@@ -105,10 +105,10 @@ MonoBehaviour:
     m_Value: 0
   limitMin:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: -3.2582805
   limitMax:
     m_OverrideState: 1
-    m_Value: 13.85
+    m_Value: 0.074489325
   curveMap:
     m_OverrideState: 0
     m_Value:
@@ -626,7 +626,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 46.9
+    m_Value: 185.9
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
