@@ -8,6 +8,7 @@ TagManager:
   - Pickup
   - Enemy
   - Weapon
+  - TerrainCamera
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - whatIsGround
   - whatIsWall
-  - 
+  - TerrainCamera
   - 
   - 
   - 
