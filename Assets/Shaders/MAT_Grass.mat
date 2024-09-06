@@ -15,8 +15,8 @@ Material:
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2475
   stringTagMap:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainTexture:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -75,8 +75,8 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _GrassSmoothness: 0.1
-    - _HeightBlend: 1
+    - _GrassSmoothness: 0.3
+    - _HeightBlend: 0.7
     - _OpaqueCullMode: 2
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -98,7 +98,7 @@ Material:
     - _SupportDecals: 1
     - _SurfaceType: 0
     - _TerrainOffset: 0.6
-    - _TerrainSize: 50
+    - _TerrainSize: 300
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -112,12 +112,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0.080102734, g: 0.3962264, b: 0.02055892, a: 0}
+    - _BottomColor: {r: 0.102394104, g: 0.15256819, b: 0.5566038, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FarColor: {r: 0.46910706, g: 0.8962264, b: 0.35933605, a: 0}
-    - _NearColor: {r: 0.7479116, g: 0.9716981, b: 0.6554379, a: 0}
-    - _NearFarRange: {r: 10, g: 25, b: 0, a: 0}
+    - _FarColor: {r: 0.99295014, g: 1, b: 0.9481132, a: 0}
+    - _NearColor: {r: 0.73315364, g: 1, b: 0.6179246, a: 0}
+    - _NearFarRange: {r: -12.37, g: 81.25, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1323570236486632128

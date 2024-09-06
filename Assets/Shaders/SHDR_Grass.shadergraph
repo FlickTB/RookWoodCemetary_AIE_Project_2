@@ -265,6 +265,20 @@
             },
             "m_InputSlot": {
                 "m_Node": {
+                    "m_Id": "7f8b6d36b7104037b2b9fa24e5f7d7b1"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "1f2ff91d43f844e58a7797cbf750e17c"
+                },
+                "m_SlotId": 3
+            },
+            "m_InputSlot": {
+                "m_Node": {
                     "m_Id": "e1f3a7b3f82d4bcea0e66f61ed9ad764"
                 },
                 "m_SlotId": 0
@@ -525,20 +539,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "e1f3a7b3f82d4bcea0e66f61ed9ad764"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "7f8b6d36b7104037b2b9fa24e5f7d7b1"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "e6d9afd9ee184559bf1046c4e2f119df"
                 },
                 "m_SlotId": 0
@@ -733,30 +733,6 @@
             "m_Id": "9af81769d59e491ea71685f1418b783b"
         }
     ]
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PositionMaterialSlot",
-    "m_ObjectId": "00da17a498774a2aad3b8d8a8cbc959d",
-    "m_Id": 3,
-    "m_DisplayName": "World Space Position",
-    "m_SlotType": 0,
-    "m_Hidden": true,
-    "m_ShaderOutputName": "WorldSpacePosition",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": [],
-    "m_Space": 2
 }
 
 {
@@ -3687,7 +3663,7 @@
             "m_Id": "311e9cd22d2341e5ad5c98042a694712"
         },
         {
-            "m_Id": "00da17a498774a2aad3b8d8a8cbc959d"
+            "m_Id": "e98cc6fbcd5546ce887b28aaf743bb63"
         }
     ],
     "synonyms": [
@@ -4646,6 +4622,30 @@
     },
     "m_Space": 2,
     "m_PositionSource": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PositionMaterialSlot",
+    "m_ObjectId": "e98cc6fbcd5546ce887b28aaf743bb63",
+    "m_Id": 3,
+    "m_DisplayName": "World Space Position",
+    "m_SlotType": 0,
+    "m_Hidden": true,
+    "m_ShaderOutputName": "WorldSpacePosition",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 2
 }
 
 {
