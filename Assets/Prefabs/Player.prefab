@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5900582870083521550}
   - component: {fileID: 5900582870083521551}
   - component: {fileID: 8214624943492412498}
+  - component: {fileID: 4002522573196809508}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -68,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
+  wallrunSpeed: 8.5
   dashSpeed: 20
   dashSpeedChangeFactor: 50
   maxYSpeed: 20
@@ -87,7 +89,10 @@ MonoBehaviour:
   maxSlopeAngle: 69
   orientation: {fileID: 5900582870374677533}
   state: 0
+  freeze: 0
+  activeGrapple: 0
   dashing: 0
+  wallrunning: 0
 --- !u!114 &5900582870083521551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5900582870083521544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60d92da61afeeba4a8491fb244dde121, type: 3}
   m_Name: 
@@ -129,11 +134,40 @@ MonoBehaviour:
   gunTip: {fileID: 0}
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 0
-  maxGrappleDistance: 0
-  grappleDelayTime: 0
-  grapplingCd: 0
+    m_Bits: 3072
+  lr: {fileID: 0}
+  maxGrappleDistance: 50
+  grappleDelayTime: 0.25
+  overshootYAxis: 10
+  grapplingCd: 1
   grappleKey: 324
+--- !u!114 &4002522573196809508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5900582870083521544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796013eb3eb77fb4589e387e5c54318d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 1024
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  wallRunForce: 200
+  wallJumpUpForce: 10
+  wallJumpSideForce: 30
+  maxWallRunTime: 1.5
+  jumpKey: 32
+  wallCheckDistance: 0.7
+  minJumpHeight: 2
+  exitWallTime: 0.2
+  orientation: {fileID: 5900582870374677533}
 --- !u!1 &5900582870374677532
 GameObject:
   m_ObjectHideFlags: 0

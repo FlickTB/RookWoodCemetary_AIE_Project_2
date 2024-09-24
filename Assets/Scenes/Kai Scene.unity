@@ -9102,6 +9102,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &907176449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6276382054306615702, guid: 26f0ce32c072ffc438b0ea9c262bd8ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 4655964286486362316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &912215397
 GameObject:
   m_ObjectHideFlags: 0
@@ -11516,6 +11522,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -12.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214624943492412498, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 6369550763799899359}
+    - target: {fileID: 8214624943492412498, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
+      propertyPath: gunTip
+      value: 
+      objectReference: {fileID: 907176449}
+    - target: {fileID: 8214624943492412498, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
+      propertyPath: grappleKey
+      value: 325
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214624943492412498, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
+      propertyPath: whatIsGrappleable.m_Bits
+      value: 3072
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa4591a9a969a5429eff1b84a780dfb, type: 3}

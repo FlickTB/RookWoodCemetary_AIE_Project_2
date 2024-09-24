@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed;                                                                                                        //Variable for the movement speed
     public float walkSpeed;                                                                                                 //Variable for the walk speed
     public float sprintSpeed;                                                                                               //Variable for the sprint speed
+    public float wallrunSpeed;
 
     public float dashSpeed;
     public float dashSpeedChangeFactor;
@@ -58,18 +59,18 @@ public class PlayerMovement : MonoBehaviour
         freeze,
         walking,                                                                                                            //Variable for the walk state
         sprinting,                                                                                                          //Variable for the sprint state
+        wallrunning,
         crouching,                                                                                                          //Variable for the crouching state
         dashing,
         air                                                                                                                 //Variable for the air state
     }
 
     public bool freeze;
-
     public bool activeGrapple;
-
     public bool dashing;
+    public bool wallrunning;
 
-    private void Start()                                                                                                    //Function called on the first frame
+    void Start()                                                                                                    //Function called on the first frame
     {
         rb = GetComponent<Rigidbody>();                                                                                     //Calling on getting the rigidbody properties
         rb.freezeRotation = true;                                                                                           //Variable for stopping rotation
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         startYScale = transform.localScale.y;                                                                               //Records the starting height of the player
     }
 
-    private void Update()                                                                                                   //Funtion called on every frame
+    void Update()                                                                                                   //Funtion called on every frame
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);             //Variable for determing the grounded properties
 
@@ -95,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()                                                                                              //Function is called on every set amount of frames
+    void FixedUpdate()                                                                                              //Function is called on every set amount of frames
     {
         MovePlayer();                                                                                                       //Calling on another function
     }
@@ -129,7 +130,12 @@ public class PlayerMovement : MonoBehaviour
 
     void StateHandler()                                                                                                     //Function that manages the different movement states
     {
-        if (freeze)
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
+        else if (freeze)
         {
             state = MovementState.freeze;
             moveSpeed = 0;
@@ -155,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.walking;                                                                                  //Changes the movement state to walking
             desiredMoveSpeed = walkSpeed;                                                                                   //Changes the movement speed to walking
+            moveSpeed = walkSpeed;
         }
         else                                                                                                                //Otherwise the player is in the air
         {
@@ -246,7 +253,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);                       //Allows speed to increase, but adjusted for air movement
         }
 
-        rb.useGravity = !OnSlope();                                                                                         //Disables gravity on the slope to stop the player moving when idle
+        if (!wallrunning)
+        {
+            rb.useGravity = !OnSlope();                                                                                     //Disables gravity on the slope to stop the player moving when idle
+        }
     }
 
     void SpeedControl()                                                                                                     //Function for setting the maximum speed of the player
