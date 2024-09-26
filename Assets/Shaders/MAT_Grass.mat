@@ -12,6 +12,7 @@ Material:
     type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
+  - _ALPHATOMASK_ON
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
   m_InvalidKeywords: []
@@ -36,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 77c19d2dc7b1f0747af8b1e045cb4899, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6f61723fc62ed944daa109ca2bae487a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainTexture:
@@ -61,9 +62,9 @@ Material:
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _AlphaToMask: 0
-    - _AlphaToMaskInspectorValue: 0
-    - _Alpha_Clip_Threshold: 0.67
+    - _AlphaToMask: 1
+    - _AlphaToMaskInspectorValue: 1
+    - _Alpha_Clip_Threshold: 0.46
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0
@@ -75,7 +76,7 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _GrassSmoothness: 0.3
+    - _GrassSmoothness: 0.31
     - _HeightBlend: 0.7
     - _OpaqueCullMode: 2
     - _RayTracing: 0
@@ -112,11 +113,11 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0.102394104, g: 0.15256819, b: 0.5566038, a: 0}
+    - _BottomColor: {r: 0.3490566, g: 0.27870965, b: 0.14653791, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FarColor: {r: 0.99295014, g: 1, b: 0.9481132, a: 0}
-    - _NearColor: {r: 0.73315364, g: 1, b: 0.6179246, a: 0}
+    - _FarColor: {r: 0.2924528, g: 0.24287614, b: 0.20002669, a: 0}
+    - _NearColor: {r: 0.7379816, g: 0.745283, b: 0.73473656, a: 0}
     - _NearFarRange: {r: -12.37, g: 81.25, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
