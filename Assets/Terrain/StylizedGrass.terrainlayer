@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1953259897 &8574412962073106934
+TerrainLayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StylizedGrass
+  m_DiffuseTexture: {fileID: 2800000, guid: bc4e49eb028001b448610b5eaf6fb691, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: ca212333bbeefa844ac57d8613a59f5e, type: 3}
+  m_MaskMapTexture: {fileID: 2800000, guid: 7369a828fe73f874ea25463ce5ec4807, type: 3}
+  m_TileSize: {x: 3, y: 3}
+  m_TileOffset: {x: 0, y: 0}
+  m_Specular: {r: 0, g: 0, b: 0, a: 0}
+  m_Metallic: 0
+  m_Smoothness: 0
+  m_NormalScale: 1
+  m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
+  m_DiffuseRemapMax: {x: 0.5458793, y: 0.67029554, z: 0.8207547, w: 1}
+  m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
+  m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}

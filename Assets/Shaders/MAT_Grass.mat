@@ -76,8 +76,8 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _GrassSmoothness: 0.31
-    - _HeightBlend: 0.7
+    - _GrassSmoothness: 0.52
+    - _HeightBlend: 0.74
     - _OpaqueCullMode: 2
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -117,7 +117,7 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FarColor: {r: 0.2924528, g: 0.24287614, b: 0.20002669, a: 0}
-    - _NearColor: {r: 0.7379816, g: 0.745283, b: 0.73473656, a: 0}
+    - _NearColor: {r: 0.58873266, g: 0.6221227, b: 0.6603774, a: 0}
     - _NearFarRange: {r: -12.37, g: 81.25, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
