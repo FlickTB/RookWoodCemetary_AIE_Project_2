@@ -1078,6 +1078,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5900582870375461064}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1214707779 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562374752687859235, guid: f04d2f957da6b1e4db639897fae28e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 6181744814385382060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1489435257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,6 +1727,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4002522573196809508, guid: cfa4591a9a969a5429eff1b84a780dfb,
         type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1799327095202233491}
+    - target: {fileID: 4002522573196809508, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
       propertyPath: useGravity
       value: 1
       objectReference: {fileID: 0}
@@ -1833,6 +1844,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5562374751752453695, guid: f04d2f957da6b1e4db639897fae28e69,
+        type: 3}
+      propertyPath: camHolder
+      value: 
+      objectReference: {fileID: 1214707779}
     - target: {fileID: 5562374751752453695, guid: f04d2f957da6b1e4db639897fae28e69,
         type: 3}
       propertyPath: orientation

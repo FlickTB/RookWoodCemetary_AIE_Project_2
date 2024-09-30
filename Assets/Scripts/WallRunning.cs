@@ -163,6 +163,7 @@ public class WallRunning : MonoBehaviour
     void StopWallRun()
     {
         pm.wallrunning = false;
+        cam.DoTilt(0f);
     }
 
     void WallJump()
