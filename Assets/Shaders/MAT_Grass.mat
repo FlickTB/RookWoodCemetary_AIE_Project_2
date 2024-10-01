@@ -77,6 +77,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _GrassSmoothness: 0.52
+    - _Grass_Sway_Speed: 0.08
     - _HeightBlend: 0.74
     - _OpaqueCullMode: 2
     - _RayTracing: 0
