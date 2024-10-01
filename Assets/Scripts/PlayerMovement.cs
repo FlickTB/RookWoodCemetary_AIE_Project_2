@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,13 +9,10 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeed;                                                                                                        //Variable for the movement speed
     public float walkSpeed;                                                                                                 //Variable for the walk speed
     public float sprintSpeed;                                                                                               //Variable for the sprint speed
-    public float wallrunSpeed;
-
-    public float dashSpeed;
-    public float dashSpeedChangeFactor;
-
-    public float maxYSpeed;
-
+    public float wallrunSpeed;                                                                                              //Variable for the wall run speed
+    public float dashSpeed;                                                                                                 //Variable for dash speed
+    public float dashSpeedChangeFactor;                                                                                     //Variable for how quickly the dash take effect
+    public float maxYSpeed;                                                                                                 //Varible that limits how quickly the player moves vertically
     public float groundDrag;                                                                                                //Variable for how much the ground slows down the player
 
     [Header("Jumping")]                                                                                                     //Title for usage in Unity
@@ -43,34 +41,31 @@ public class PlayerMovement : MonoBehaviour
     RaycastHit slopeHit;                                                                                                    //Stores that the player is on a slope
     bool exitingSlope;                                                                                                      //Variable for knowing when the player isn't on a slope
 
+    [Header("Other")]                                                                                                       //Title for usage in Unity
     public Transform orientation;                                                                                           //A reference for the direction the player is facing
-
     float horizontalInput;                                                                                                  //Variable for the player's movement
     float verticalInput;                                                                                                    //Variable for the player's movement
-
     Vector3 moveDirection;                                                                                                  //Variable for the direction the player is moving
-
     Rigidbody rb;                                                                                                           //A reference for physics being used on the player
-
     public MovementState state;                                                                                             //A list of movement options the player can perform
 
     public enum MovementState                                                                                               //The list of movement options
     {
-        freeze,
+        freeze,                                                                                                             //Varaible for the freeze state, used during grapple
         walking,                                                                                                            //Variable for the walk state
         sprinting,                                                                                                          //Variable for the sprint state
-        wallrunning,
+        wallrunning,                                                                                                        //Variable for the wall running state
         crouching,                                                                                                          //Variable for the crouching state
-        dashing,
+        dashing,                                                                                                            //Variable for the dashing state
         air                                                                                                                 //Variable for the air state
     }
 
-    public bool freeze;
-    public bool activeGrapple;
-    public bool dashing;
-    public bool wallrunning;
+    public bool freeze;                                                                                                     //Variable for the freeze state, used during the grapple
+    public bool activeGrapple;                                                                                              //Variable for the grapple state
+    public bool dashing;                                                                                                    //Variable for the dashing state
+    public bool wallrunning;                                                                                                //Variable for the wall running state
 
-    void Start()                                                                                                    //Function called on the first frame
+    void Start()                                                                                                            //Function called on the first frame
     {
         rb = GetComponent<Rigidbody>();                                                                                     //Calling on getting the rigidbody properties
         rb.freezeRotation = true;                                                                                           //Variable for stopping rotation
@@ -78,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         startYScale = transform.localScale.y;                                                                               //Records the starting height of the player
     }
 
-    void Update()                                                                                                   //Funtion called on every frame
+    void Update()                                                                                                           //Funtion called on every frame
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);             //Variable for determing the grounded properties
 
@@ -96,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()                                                                                              //Function is called on every set amount of frames
+    void FixedUpdate()                                                                                                      //Function is called on every set amount of frames
     {
         MovePlayer();                                                                                                       //Calling on another function
     }
@@ -123,29 +118,29 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    float desiredMoveSpeed;
-    float lastDesiredMoveSpeed;
-    MovementState lastState;
-    bool keepMomentum;
+    float desiredMoveSpeed;                                                                                                 //Variable for the speed the player should be
+    float lastDesiredMoveSpeed;                                                                                             //Variable for what speed the player used to be
+    MovementState lastState;                                                                                                //Variable for the movement state the player used to be, used to keep momentum
+    bool keepMomentum;                                                                                                      //Variable for if the player keeps momentum
 
     void StateHandler()                                                                                                     //Function that manages the different movement states
     {
-        if (wallrunning)
+        if (wallrunning)                                                                                                    //If the player is wall running
         {
-            state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed;
+            state = MovementState.wallrunning;                                                                              //Changes the movement state to wall running
+            desiredMoveSpeed = wallrunSpeed;                                                                                //Sets the player speed to wall running speed
         }
-        else if (freeze)
+        else if (freeze)                                                                                                    //If the player is in the freeze state (grappling)
         {
-            state = MovementState.freeze;
-            moveSpeed = 0;
-            rb.velocity = Vector3.zero;
+            state = MovementState.freeze;                                                                                   //Changes the movement state to freeze
+            moveSpeed = 0;                                                                                                  //Sets move speed to zero
+            rb.velocity = Vector3.zero;                                                                                     //Sets velocity to zero
         }
-        else if(dashing)
+        else if(dashing)                                                                                                    //If the player wants to dash
         {
-            state = MovementState.dashing;
-            desiredMoveSpeed = dashSpeed;
-            speedChangeFactor = dashSpeedChangeFactor;
+            state = MovementState.dashing;                                                                                  //Changes the movement state to dashing
+            desiredMoveSpeed = dashSpeed;                                                                                   //Changes the player speed to dashing
+            speedChangeFactor = dashSpeedChangeFactor;                                                                      //Changes how quicly the player alters their speed
         }
         else if(Input.GetKey(crouchKey))                                                                                    //If the player wants to crouch
         {
@@ -161,76 +156,78 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.walking;                                                                                  //Changes the movement state to walking
             desiredMoveSpeed = walkSpeed;                                                                                   //Changes the movement speed to walking
-            moveSpeed = walkSpeed;
+            moveSpeed = walkSpeed;                                                                                          //Failsafe to ensures the player can walk again
         }
         else                                                                                                                //Otherwise the player is in the air
         {
             state = MovementState.air;                                                                                      //Changes the movement state to air
             
-            if(desiredMoveSpeed < sprintSpeed)
+            if(desiredMoveSpeed < sprintSpeed)                                                                              //If the player's speed is slower than a sprint                                                                        
             {
-                desiredMoveSpeed = walkSpeed;
+                desiredMoveSpeed = walkSpeed;                                                                               //The player's speed is set to walk
             }
-            else
+            else                                                                                                            //Otherwise the speed changes
             {
-                desiredMoveSpeed = sprintSpeed;
+                desiredMoveSpeed = sprintSpeed;                                                                             //Player's speed becomes a sprint speed
             }
         }
 
-        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;
-        if(lastState == MovementState.dashing)
+        bool desiredMoveSpeedHasChanged = desiredMoveSpeed != lastDesiredMoveSpeed;                                         //Variable for when the player speed changes
+
+        if(lastState == MovementState.dashing)                                                                              //If the last movement state was dashing
         {
-            keepMomentum = true;
+            keepMomentum = true;                                                                                            //Keep the player momentum
         }
 
-        if(desiredMoveSpeedHasChanged)
+        if(desiredMoveSpeedHasChanged)                                                                                      //If the player speed has changed
         {
-            if(keepMomentum)
+            if(keepMomentum)                                                                                                //If the player keeps their momentum
             {
-                StopAllCoroutines();
-                StartCoroutine(SmoothlyLerpMoveSpeed());
+                StopAllCoroutines();                                                                                        //Calls another function
+                StartCoroutine(SmoothlyLerpMoveSpeed());                                                                    //Calls another function
             }
-            else
+            else                                                                                                            //Otherwise
             {
-                StopAllCoroutines();
-                moveSpeed = desiredMoveSpeed;
+                StopAllCoroutines();                                                                                        //Calls another function
+                moveSpeed = desiredMoveSpeed;                                                                               //Movement becomes the whaat it should be
             }
         }
-        lastDesiredMoveSpeed = desiredMoveSpeed;
-        lastState = state;
+
+        lastDesiredMoveSpeed = desiredMoveSpeed;                                                                            //The last move speed becomes the current move speed
+        lastState = state;                                                                                                  //The last state is the current state
     }
 
-    float speedChangeFactor;
+    float speedChangeFactor;                                                                                                //Variable for the rate at which the player changes speed
 
-    IEnumerator SmoothlyLerpMoveSpeed()
+    IEnumerator SmoothlyLerpMoveSpeed()                                                                                     //Maths function to change speed
     {
-        float time = 0;
-        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
-        float startValue = moveSpeed;
+        float time = 0;                                                                                                     //Variable for time
+        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);                                                         //Variable for the difference between the current speed and the intended speed
+        float startValue = moveSpeed;                                                                                       //The start calculation speed is the current speed
 
-        float boostFactor = speedChangeFactor;
+        float boostFactor = speedChangeFactor;                                                                              //The boost change is the same as the speed change
 
-        while (time < difference)
+        while (time < difference)                                                                                           //While the time is smaller the difference
         {
-            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
-            time += Time.deltaTime * boostFactor;
-            yield return null;
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);                                        //The move speed gets calculated 
+            time += Time.deltaTime * boostFactor;                                                                           //The time value changes
+            yield return null;                                                                                              //Returns null
         }
 
-        moveSpeed = desiredMoveSpeed;
-        speedChangeFactor = 1f;
-        keepMomentum = false;
+        moveSpeed = desiredMoveSpeed;                                                                                       //The move speed becomes a the desired move speed
+        speedChangeFactor = 1f;                                                                                             //The speed change gets a new value
+        keepMomentum = false;                                                                                               //Player doesn't keep their momentum
     }
 
     void MovePlayer()                                                                                                       //Function for player's movement
     {
-        if(activeGrapple)
+        if(activeGrapple)                                                                                                   //If the player is grappling
         {
-            return;
+            return;                                                                                                         //Returns
         }
-        if(state == MovementState.dashing)
+        if(state == MovementState.dashing)                                                                                  //If the player is dashing
         {
-            return;
+            return;                                                                                                         //Returns
         }
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;                          //Determines how the player moves foward 
@@ -253,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);                       //Allows speed to increase, but adjusted for air movement
         }
 
-        if (!wallrunning)
+        if (!wallrunning)                                                                                                   //If the player isn't wall running
         {
             rb.useGravity = !OnSlope();                                                                                     //Disables gravity on the slope to stop the player moving when idle
         }
@@ -261,9 +258,9 @@ public class PlayerMovement : MonoBehaviour
 
     void SpeedControl()                                                                                                     //Function for setting the maximum speed of the player
     {
-        if(activeGrapple)
+        if(activeGrapple)                                                                                                   //If the player is grappling
         {
-            return;
+            return;                                                                                                         //Returns
         }
         if(OnSlope() && !exitingSlope)                                                                                      //If they are on a slope
         {
@@ -272,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * moveSpeed;                                                           //Slow down the player to the correct speed
             }
         }
-        else
+        else                                                                                                                //Otherwise
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);                                                //Creates a variable for the maximum speed
 
@@ -282,9 +279,9 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);                                       //Calls on variable for the maximum speed
             }
         }
-        if(maxYSpeed != 0 && rb.velocity.y > maxYSpeed)
+        if(maxYSpeed != 0 && rb.velocity.y > maxYSpeed)                                                                     //If the max y speed is greater than zero and has velocity
         {
-            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x, maxYSpeed, rb.velocity.z);                                             //The velocity gets a new value
         }
     }
 
@@ -301,18 +298,18 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = false;                                                                                               //On a slope
     }
 
-    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)                                              //Function for grappling to a location
     {
-        activeGrapple = true;
-        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
-        Invoke(nameof(SetVelocity), 0.1f);
+        activeGrapple = true;                                                                                               //The player is grappling
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);                        //Calculates the velocity for the grapple
+        Invoke(nameof(SetVelocity), 0.1f);                                                                                  //Calls another function
     }
 
-    Vector3 velocityToSet;
+    Vector3 velocityToSet;                                                                                                  //Variable for a velocity for the player
     
-    void SetVelocity()
+    void SetVelocity()                                                                                                      //Function for the player's velocity
     {
-        rb.velocity = velocityToSet;
+        rb.velocity = velocityToSet;                                                                                        //Current velocity becomes the intended velocity
     }
 
     bool OnSlope()                                                                                                          //Function for being on a slope
@@ -331,17 +328,17 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;                                           //Keeps the player moving correctly
     }
 
-    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)                      //Function for the player's jump velocity
     {
-        float gravity = Physics.gravity.y;
-        float displacementY = endPoint.y = startPoint.y;
-        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+        float gravity = Physics.gravity.y;                                                                                  //The variable gravity is equal to the game's gravity
+        float displacementY = endPoint.y = startPoint.y;                                                                    //The displacement is the same as the start and end points
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);                     //Calculation for new Vector
 
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) 
-                           + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);                                       //Calculation for the vertical velocity
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity)                                  //Calculation for the horizontal velocity
+                           + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));                                 //Calculation for the horizontal velocity
 
-        return velocityXZ + velocityY;
+        return velocityXZ + velocityY;                                                                                      //Returns the velocities
 
     }
 }

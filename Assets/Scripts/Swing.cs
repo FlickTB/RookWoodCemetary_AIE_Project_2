@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Swing : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator animator;                                                                             //Refernce for the animation
 
-    void Update()
+    void Update()                                                                                                           //Function called every frame
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))                                                                               //If the player left clicks
         {
-            animator.SetBool("Swing", true);
-            GetComponent<MeshCollider>().enabled = true;
+            animator.SetBool("Swing", true);                                                                                //Allows the animation to play
+            GetComponent<MeshCollider>().enabled = true;                                                                    //Activates the shovel hitbox
 
-            Invoke(nameof(Cooldown), 1f);
+            Invoke(nameof(Cooldown), 1f);                                                                                   //Calls on the other function
         }
     }
 
-    void Cooldown()
+    void Cooldown()                                                                                                         //Function for stopping the swing
     {
-        animator.SetBool("Swing", false);
-        GetComponent<MeshCollider>().enabled = false;
+        animator.SetBool("Swing", false);                                                                                   //Stops the swing animation
+        GetComponent<MeshCollider>().enabled = false;                                                                       //Disables the hitbox
     }
 }

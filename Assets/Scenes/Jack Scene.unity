@@ -1835,6 +1835,11 @@ PrefabInstance:
       propertyPath: gunTip
       value: 
       objectReference: {fileID: 6276382054282590472}
+    - target: {fileID: 8214624943492412498, guid: cfa4591a9a969a5429eff1b84a780dfb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa4591a9a969a5429eff1b84a780dfb, type: 3}
 --- !u!1001 &6181744814385382060
