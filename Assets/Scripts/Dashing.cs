@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class Dashing : MonoBehaviour
 {
-    [Header("References")]
-    public Transform orientation;
-    public Transform playerCam;
-    Rigidbody rb;
-    PlayerMovement pm;
+    [Header("References")]                                                                                                  //Title for usage in Unity
+    public Transform orientation;                                                                                           //Reference for camera orientation
+    public Transform playerCam;                                                                                             //Reference for player camera
+    Rigidbody rb;                                                                                                           //Reference for the player physics
+    PlayerMovement pm;                                                                                                      //Refernece for the player movement script
 
-    [Header("Dahing")]
-    public float dashForce;
-    public float dashUpwardForce;
-    public float maxDashYSpeed;
-    public float dashDuration;
+    [Header("Dahing")]                                                                                                      //Title for usage in Unity
+    public float dashForce;                                                                                                 //A varible for the horizontal dash speed
+    public float dashUpwardForce;                                                                                           //A varible for the vertical dash speed
+    public float maxDashYSpeed;                                                                                             //A varible for the max amount of vertical speed
+    public float dashDuration;                                                                                              //A varible for how long the dash last
 
-    [Header("CameraEffects")]
-    public PlayerCam cam;
-    public float dashFov;
+    [Header("CameraEffects")]                                                                                               //Title for usage in Unity
+    public PlayerCam cam;                                                                                                   //Reference for player camera
+    public float dashFov;                                                                                                   //Variable for the change to FOV during dash
 
-    [Header("Settings")]
-    public bool useCameraForward = true;
-    public bool allowAllDirections = true;
-    public bool disableGravity = false;
+    [Header("Settings")]                                                                                                    //Title for usage in Unity
+    public bool useCameraForward = true;                                                                                    //
+    public bool allowAllDirections = true;                                                                                  //
+    public bool disableGravity = false;                                                                                     //
 
-    [Header("Cooldown")]
-    public float dashCd;
-    float dashCdTimer;
+    [Header("Cooldown")]                                                                                                    //Title for usage in Unity
+    public float dashCd;                                                                                                    //Time for dash to reset
+    float dashCdTimer;                                                                                                      //
 
-    [Header("Input")]
+    [Header("Input")]                                                                                                       //Title for usage in Unity
     public KeyCode dashKey = KeyCode.E;
 
     void Start()

@@ -17,9 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]                                                                                                     //Title for usage in Unity
     public float jumpForce;                                                                                                 //Variable for how high the player jumps
+    public float jumpForceNormal;                                                                                           //Variable for what the standard jump force is
     public float jumpCooldown;                                                                                              //Variable for how often the player can jump
     public float airMultiplier;                                                                                             //Variable for how being in the air affects movement speed
     bool readyToJump;                                                                                                       //Variable for when the player is able to jump
+    public float leapMultiplier;                                                                                            //Variable for how much additional force is applied for leaping
 
     [Header("Crouching")]                                                                                                   //Title for usage in Unity
     public float crouchSpeed;                                                                                               //Variable for crouch speed
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]                                                                                                //Title for usage in Unity
     public float playerHeight;                                                                                              //Variable for how tall the player is
     public LayerMask whatIsGround;                                                                                          //A reference for what is considered the ground
-    bool grounded;                                                                                                          //Variable for the player being on the ground
+    public bool grounded;                                                                                                   //Variable for the player being on the ground
 
     [Header("Slope Handling")]                                                                                              //Title for usage in Unity
     public float maxSlopeAngle;                                                                                             //Variable for the angles the player can't climb
@@ -107,12 +109,19 @@ public class PlayerMovement : MonoBehaviour
             Jump();                                                                                                         //Calling on another function
             Invoke(nameof(ResetJump), jumpCooldown);                                                                        //Calling on another function
         }
-        if(Input.GetKeyDown(crouchKey))                                                                                     //When the crouch button is pressed
+        if (Input.GetKey(KeyCode.Q) && readyToJump && grounded)                                                             //When the player wants to leap                  
+        {
+            readyToJump = false;                                                                                            //The player can no longer jump
+            jumpForce = jumpForce * leapMultiplier;                                                                         //Change the jump to a leap
+            Jump();                                                                                                         //Calling on another function
+            Invoke(nameof(ResetJump), jumpCooldown);                                                                        //Calling on another function
+        }
+        if (Input.GetKeyDown(crouchKey))                                                                                    //When the crouch button is pressed
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);               //Changes the height of the player, thus they crouch
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);                                                              //Applies force to the player so they stay grounded
         }
-        if(Input.GetKeyUp(crouchKey))                                                                                       //When the crouch button is released
+        if (Input.GetKeyUp(crouchKey))                                                                                      //When the crouch button is released
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);                //Reverts the player height back to normal
         }
@@ -295,6 +304,7 @@ public class PlayerMovement : MonoBehaviour
     void ResetJump()                                                                                                        //Function for resetting the jump
     {
         readyToJump = transform;                                                                                            //Allows the player to jump again
+        jumpForce = jumpForceNormal;                                                                                        //Resets the jump force back to the standard value
         exitingSlope = false;                                                                                               //On a slope
     }
 
