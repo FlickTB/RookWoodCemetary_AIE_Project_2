@@ -11,7 +11,7 @@ public class Swing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))                                                                               //If the player left clicks
         {
             animator.SetBool("Swing", true);                                                                                //Allows the animation to play
-            GetComponent<MeshCollider>().enabled = true;                                                                    //Activates the shovel hitbox
+            GetComponent<BoxCollider>().enabled = true;                                                                     //Activates the shovel hitbox
 
             Invoke(nameof(Cooldown), 1f);                                                                                   //Calls on the other function
         }
@@ -20,6 +20,6 @@ public class Swing : MonoBehaviour
     void Cooldown()                                                                                                         //Function for stopping the swing
     {
         animator.SetBool("Swing", false);                                                                                   //Stops the swing animation
-        GetComponent<MeshCollider>().enabled = false;                                                                       //Disables the hitbox
+        GetComponent<BoxCollider>().enabled = false;                                                                        //Disables the hitbox
     }
 }
