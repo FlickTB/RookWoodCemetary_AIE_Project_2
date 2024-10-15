@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: TridentScript
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":-779.1632,"y":203.0569},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{"target":null},"position":{"x":-1366.0,"y":-388.0},"guid":"3a304418-beff-470c-9884-fc4f3cd31166","$version":"A","$type":"Unity.VisualScripting.OnTriggerEnter","$id":"9"},{"specifyFallback":false,"kind":"Object","defaultValues":{"name":{"$content":"Trident","$type":"System.String"},"object":null},"position":{"x":-723.0,"y":-83.0},"guid":"78f1d28e-305e-499c-ad3c-4a532b0e22cf","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"11"},{"chainable":false,"parameterNames":["value"],"member":{"name":"SetActive","parameterTypes":["System.Boolean"],"targetType":"UnityEngine.GameObject","targetTypeName":"UnityEngine.GameObject","$version":"A"},"defaultValues":{"target":null,"%value":{"$content":false,"$type":"System.Boolean"}},"position":{"x":-387.0,"y":-336.0},"guid":"b982fcc5-64e2-4e7b-965c-dd6ac153c972","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"13"},{"defaultValues":{},"position":{"x":-860.0,"y":-392.0},"guid":"2bb82518-076a-4e9f-aa46-da1bf37eb28b","$version":"A","$type":"Unity.VisualScripting.If","$id":"17"},{"specifyFallback":false,"kind":"Scene","defaultValues":{"name":{"$content":"On
+      Podium","$type":"System.String"}},"position":{"x":-1096.0,"y":-175.0},"guid":"66598909-18a9-445d-bd73-a93b5f141c0e","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"19"},{"kind":"Scene","defaultValues":{"name":{"$content":"Holding
+      Trident","$type":"System.String"}},"position":{"x":-637.0,"y":-377.0},"guid":"d00a6690-d974-444d-82ca-46b71ee281ef","$version":"A","$type":"Unity.VisualScripting.SetVariable","$id":"21"},{"type":"System.Boolean","value":{"$content":true,"$type":"System.Boolean"},"defaultValues":{},"position":{"x":-784.0,"y":-262.0},"guid":"78bacfe7-7f95-4e45-b807-8884326004e0","$version":"A","$type":"Unity.VisualScripting.Literal","$id":"23"},{"sourceUnit":{"$ref":"9"},"sourceKey":"trigger","destinationUnit":{"$ref":"17"},"destinationKey":"enter","guid":"6e4983e2-0d5e-46c5-a734-6d3f8d607c1e","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"ifFalse","destinationUnit":{"$ref":"21"},"destinationKey":"assign","guid":"6d1a4c0e-c6ab-48e8-933d-e55ccedb0b62","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"21"},"sourceKey":"assigned","destinationUnit":{"$ref":"13"},"destinationKey":"enter","guid":"856aeba1-78e2-462a-b25f-858e747596a1","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"11"},"sourceKey":"value","destinationUnit":{"$ref":"13"},"destinationKey":"target","guid":"47c3d1bb-cd48-4254-985a-41ffe12f62fd","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"19"},"sourceKey":"value","destinationUnit":{"$ref":"17"},"destinationKey":"condition","guid":"ce8f7c3b-5f8f-48fc-81dc-a45b6651011b","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"23"},"sourceKey":"output","destinationUnit":{"$ref":"21"},"destinationKey":"input","guid":"0ea36f06-dca5-495b-ace5-f85a6cde52dd","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []
