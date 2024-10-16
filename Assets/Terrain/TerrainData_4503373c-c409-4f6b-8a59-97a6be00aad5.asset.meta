@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Terrain/TerrainData_4503373c-c409-4f6b-8a59-97a6be00aad5.asset.meta
 guid: 17b2b90348abc064c8a469772ad487aa
+========
+guid: 199ff271af2b66849ad56181af28c6e4
+>>>>>>>> 067a1964258f32eb79908d8be216068757baaab0:Assets/Terrain/TerrainData_ae0b2aae-2c6f-4f46-b474-6464bdbac7f2.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 15600000

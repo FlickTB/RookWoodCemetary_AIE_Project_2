@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/New Material 1.mat.meta
 guid: ee1b965dfe24bb945b2464d2c43b3e9b
+========
+guid: 17b2b90348abc064c8a469772ad487aa
+>>>>>>>> 067a1964258f32eb79908d8be216068757baaab0:Assets/Terrain/TerrainData_4503373c-c409-4f6b-8a59-97a6be00aad5.asset.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 15600000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
