@@ -33,13 +33,13 @@ public class PlayerCam : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);                                                           //Rotates the camera on the Y axis
     }
 
-    public void DoFov(float endValue)
+    public void DoFov(float endValue)                                                                                       //Function for the camera FOV change
     {
-        GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);
+        GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);                                                              //Gets the camera and establishs a function to change the FOV
     }
 
-    public void DoTilt(float zTilt)
+    public void DoTilt(float zTilt)                                                                                         //Function for the camera tilt
     {
-        transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
+        transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);                                                           //Changes the camera angle
     }
 }

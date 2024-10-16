@@ -15,5 +15,5 @@ public class Exit : MonoBehaviour
     public void Leave() //Varible foring leave (used with a mouse click)
     {
         Application.Quit(); //Quits the application
-    }
+    }    
 }

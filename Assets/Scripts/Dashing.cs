@@ -4,132 +4,132 @@ using UnityEngine;
 
 public class Dashing : MonoBehaviour
 {
-    [Header("References")]
-    public Transform orientation;
-    public Transform playerCam;
-    Rigidbody rb;
-    PlayerMovement pm;
+    [Header("References")]                                                                                                  //Title for usage in Unity
+    public Transform orientation;                                                                                           //Reference for camera orientation
+    public Transform playerCam;                                                                                             //Reference for player camera
+    Rigidbody rb;                                                                                                           //Reference for the player physics
+    PlayerMovement pm;                                                                                                      //Refernece for the player movement script
 
-    [Header("Dahing")]
-    public float dashForce;
-    public float dashUpwardForce;
-    public float maxDashYSpeed;
-    public float dashDuration;
+    [Header("Dahing")]                                                                                                      //Title for usage in Unity
+    public float dashForce;                                                                                                 //A varible for the horizontal dash speed
+    public float dashUpwardForce;                                                                                           //A varible for the vertical dash speed
+    public float maxDashYSpeed;                                                                                             //A varible for the max amount of vertical speed
+    public float dashDuration;                                                                                              //A varible for how long the dash last
 
-    [Header("CameraEffects")]
-    public PlayerCam cam;
-    public float dashFov;
+    [Header("CameraEffects")]                                                                                               //Title for usage in Unity
+    public PlayerCam cam;                                                                                                   //Reference for player camera
+    public float dashFov;                                                                                                   //Variable for the change to FOV during dash
 
-    [Header("Settings")]
-    public bool useCameraForward = true;
-    public bool allowAllDirections = true;
-    public bool disableGravity = false;
+    [Header("Settings")]                                                                                                    //Title for usage in Unity
+    public bool useCameraForward = true;                                                                                    //Variable for camera's orientation
+    public bool allowAllDirections = true;                                                                                  //Variable for camera's directions
+    public bool disableGravity = false;                                                                                     //Varible for gravity usage
 
-    [Header("Cooldown")]
-    public float dashCd;
-    float dashCdTimer;
+    [Header("Cooldown")]                                                                                                    //Title for usage in Unity
+    public float dashCd;                                                                                                    //Time for dash to reset
+    float dashCdTimer;                                                                                                      //Time until dash cooldown
 
-    [Header("Input")]
-    public KeyCode dashKey = KeyCode.E;
+    [Header("Input")]                                                                                                       //Title for usage in Unity
+    public KeyCode dashKey = KeyCode.E;                                                                                     //Input for dash
 
-    void Start()
+    void Start()                                                                                                            //Function called at the start
     {
-        rb = GetComponent<Rigidbody>();
-        pm = GetComponent<PlayerMovement>();
+        rb = GetComponent<Rigidbody>();                                                                                     //Refernce to the rigidbody
+        pm = GetComponent<PlayerMovement>();                                                                                //Refernce to player movement script
     }
 
-    private void Update()
+    void Update()                                                                                                           //Function called every frame
     {
-        if(Input.GetKeyDown(dashKey))
+        if (Input.GetKeyDown(dashKey))                                                                                      //If the player dashes
         {
-            Dash();
+            Dash();                                                                                                         //Call the dash script
         }
-        if(dashCdTimer > 0)
+        if (dashCdTimer > 0)                                                                                                //If the cooldown timer is greater than zero
         {
-            dashCdTimer -= Time.deltaTime;
+            dashCdTimer -= Time.deltaTime;                                                                                  //Cooldown timer ticks down
         }
     }
-    void Dash()
+    void Dash()                                                                                                             //Function for the player dashing
     {
-        if (dashCdTimer > 0)
+        if (dashCdTimer > 0)                                                                                                //If the dash timer is greater than 0
         {
-            return;
+            return;                                                                                                         //Return
         }
-        else
+        else                                                                                                                //Otherwise
         {
-            dashCdTimer = dashCd;
-        }
-
-        pm.dashing = true;
-        pm.maxYSpeed = maxDashYSpeed;
-
-        cam.DoFov(dashFov);
-
-        Transform forwardT;
-
-        if(useCameraForward)
-        {
-            forwardT = playerCam;
-        }
-        else
-        {
-            forwardT = orientation;
+            dashCdTimer = dashCd;                                                                                           //The dash timer is reset
         }
 
-        Vector3 direction = GetDirection(forwardT);
-        Vector3 forceToApply = direction * dashForce + orientation.up * dashUpwardForce;
+        pm.dashing = true;                                                                                                  //The player is dashing
+        pm.maxYSpeed = maxDashYSpeed;                                                                                       //The dash vertical speed 
 
-        if(disableGravity)
+        cam.DoFov(dashFov);                                                                                                 //Calls the FOV change function
+
+        Transform forwardT;                                                                                                 //Refernce for forward direction
+
+        if (useCameraForward)                                                                                               //If the camera faces forward
         {
-            rb.useGravity = false;
+            forwardT = playerCam;                                                                                           //The forward direction is the direction of the camera
+        }
+        else                                                                                                                //Otherwise
+        {
+            forwardT = orientation;                                                                                         //The direction is the camera orientation
         }
 
-        rb.AddForce(forceToApply, ForceMode.Impulse);
-        Invoke(nameof(DelayedDashForce), 0.025f);
+        Vector3 direction = GetDirection(forwardT);                                                                         //New vector for direction
+        Vector3 forceToApply = direction * dashForce + orientation.up * dashUpwardForce;                                    //New vector for dash force
 
-        Invoke(nameof(ResetDash), dashDuration);
+        if (disableGravity)                                                                                                 //If the gravity is disabled
+        {
+            rb.useGravity = false;                                                                                          //Don't use gravity
+        }
+
+        rb.AddForce(forceToApply, ForceMode.Impulse);                                                                       //Add force
+        Invoke(nameof(DelayedDashForce), 0.025f);                                                                           //Delay the dash
+
+        Invoke(nameof(ResetDash), dashDuration);                                                                            //Reset the dash
     }
 
-    Vector3 delayedForceToApply;
+    Vector3 delayedForceToApply;                                                                                            //Vector for the delayed force
 
-    void DelayedDashForce()
+    void DelayedDashForce()                                                                                                 //Function for the delayed dash force
     {
-        rb.AddForce(delayedForceToApply, ForceMode.Impulse);
+        rb.AddForce(delayedForceToApply, ForceMode.Impulse);                                                                //Add force
     }
 
-    void ResetDash()
+    void ResetDash()                                                                                                        //Function for the dash reset
     {
-        pm.dashing = false;
-        pm.maxYSpeed = 0;
+        pm.dashing = false;                                                                                                 //Player isn't dashing
+        pm.maxYSpeed = 0;                                                                                                   //Dash vertical speed is set to zero
 
-        cam.DoFov(85f);
+        cam.DoFov(85f);                                                                                                     //Change the FOV of the camera
 
-        if (disableGravity)
+        if (disableGravity)                                                                                                 //If the gravity is disabled
         {
-            rb.useGravity = true;
+            rb.useGravity = true;                                                                                           //The player uses gavity again
         }
     }
 
-    Vector3 GetDirection(Transform forwardT)
+    Vector3 GetDirection(Transform forwardT)                                                                                //Vector for the player direction
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3();
+        float horizontalInput = Input.GetAxisRaw("Horizontal");                                                             //Get the horizontal movement
+        float verticalInput = Input.GetAxisRaw("Vertical");                                                                 //Get the vertical movement
+        Vector3 direction = new Vector3();                                                                                  //Make a new vector direction
 
-        if(allowAllDirections)
+        if (allowAllDirections)                                                                                             //If the player can dash any direction
         {
-            direction = forwardT.forward * verticalInput + forwardT.right * horizontalInput;
+            direction = forwardT.forward * verticalInput + forwardT.right * horizontalInput;                                //The player dashes in the direction they're moving
         }
-        else
+        else                                                                                                                //Otherwise
         {
-            direction = forwardT.forward;
+            direction = forwardT.forward;                                                                                   //Dash forward
         }
-        if(verticalInput == 0 && horizontalInput == 0)
+        if (verticalInput == 0 && horizontalInput == 0)                                                                     //If the player inputs are zero
         {
-            direction = forwardT.forward;
+            direction = forwardT.forward;                                                                                   //Dash forward
         }
 
-        return direction.normalized;
+        return direction.normalized;                                                                                        //Return the direction
     }
 
 }
