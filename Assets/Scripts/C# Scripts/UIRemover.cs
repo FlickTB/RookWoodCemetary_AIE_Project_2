@@ -14,7 +14,7 @@ public class UIRemover : MonoBehaviour
         Invoke(nameof(UIChange), uiTime);                                                                                   //Calls the other function
     }
 
-    void OnTriggerEnter()                                                                                                   //Function called when player walks into a trigger
+    void OnTriggerEnter(Collider other)                                                                                     //Function called when player walks into a trigger
     {
         UIChange();                                                                                                         //Calls the other function
     }
