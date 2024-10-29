@@ -114,7 +114,7 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -314179848895504997}
-    m_Position: {x: 270, y: 310, z: 0}
+    m_Position: {x: 270, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4081194844087726243}
     m_Position: {x: 570, y: 260, z: 0}
@@ -149,6 +149,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: Jumpsacre
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -170,7 +176,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Waiting
-  m_Speed: 1
+  m_Speed: 100
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4313789539832963971}
@@ -277,7 +283,7 @@ AnimatorStateTransition:
   m_Name: jump
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Armature|ArmatureAction_001 (1)
+    m_ConditionEvent: Jumpsacre
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -314179848895504997}
