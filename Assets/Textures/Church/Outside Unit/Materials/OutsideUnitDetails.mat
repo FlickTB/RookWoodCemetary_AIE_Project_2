@@ -16,7 +16,7 @@ Material:
   - _NORMALMAP_TANGENT_SPACE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
   stringTagMap: {}
@@ -34,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 9c9d013a5627961478d2d309a4f9d094, type: 3}
+        m_Texture: {fileID: 2800000, guid: f920e6f1b39069f4b9646be0aefec1c0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -70,15 +70,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9c9d013a5627961478d2d309a4f9d094, type: 3}
+        m_Texture: {fileID: 2800000, guid: f920e6f1b39069f4b9646be0aefec1c0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 6e93fef27cd3a044fa8dda7cf78c424b, type: 3}
+        m_Texture: {fileID: 2800000, guid: ebef89727351a1548ae5b509dc71981c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 7bfb76cf303f0ad4db71f848f81ae6c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: e3ed54802b91e1748b96706e502f0c70, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
