@@ -7,6 +7,9 @@ public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI countdownText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] PlayerMovement movement;
+    [SerializeField] Swing swing;
+    [SerializeField] PlayerCam cam;
     public float killPoints;
     public float finalscore;
     public float timeLeft;
@@ -64,9 +67,4 @@ public class ScoreSystem : MonoBehaviour
             scoreText.text = string.Format("Score: {0000:0}", finalscore);
         }
     }
-
-    //void End()
-    //{
-    //    reachedEnd = true;
-    //}
 }

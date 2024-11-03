@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+    public void load0()                                                                                                     //Function for loading Level Menu
+    {
+        SceneManager.LoadScene("LevelMenu");                                                                                //Loads Level Menu
+    }
+
     public void load1()                                                                                                     //Function for loading Level 1
     {
         SceneManager.LoadScene("Kai Scene");                                                                                //Loads Level 1
