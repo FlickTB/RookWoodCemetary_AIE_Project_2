@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Build Levels/MainMenu.unity
+    path: Assets/Scenes/Build Levels/MainMenu1.unity
     guid: ce8499c28ac06774a94895f3345ed500
   - enabled: 0
     path: Assets/Scenes/Jack Scene.unity
