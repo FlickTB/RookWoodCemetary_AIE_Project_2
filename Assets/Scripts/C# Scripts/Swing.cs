@@ -15,16 +15,16 @@ public class Swing : MonoBehaviour
             GetComponent<BoxCollider>().enabled = true;                                                                     //Activates the shovel hitbox
             canSecondSwing = true;
 
-            if (Input.GetKey(KeyCode.Mouse1) && canSecondSwing)                                                         //If the player wants to do a combo
+            if (Input.GetKey(KeyCode.Mouse1) && canSecondSwing)                                                             //If the player wants to do a combo
             {
                 animator.SetBool("Swing 2", true);                                                                          //Allows second animation to play
                 GetComponent<BoxCollider>().enabled = true;                                                                 //Activates the shovel hit box
                 canSecondSwing = false;
-                Invoke(nameof(Cooldown), .75f);                                                                               //Calls on the other function
+                Invoke(nameof(Cooldown), .75f);                                                                             //Calls on the other function
             }
             else
             {
-                Invoke(nameof(Cooldown), .75f);                                                                               //Calls on the other function
+                Invoke(nameof(Cooldown), .75f);                                                                             //Calls on the other function
             }
         }
     }
