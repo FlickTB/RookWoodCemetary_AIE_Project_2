@@ -12606,6 +12606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53757037718956945, guid: bdcfdc8767065b44795a677624c23380,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: ba8c16cd12bfb0549b93910d545d6671, type: 3}
     - target: {fileID: 2411610092868980763, guid: bdcfdc8767065b44795a677624c23380,
         type: 3}
       propertyPath: m_Texture
