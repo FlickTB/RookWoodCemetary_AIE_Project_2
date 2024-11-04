@@ -7,9 +7,6 @@ public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI countdownText;
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] PlayerMovement movement;
-    [SerializeField] Swing swing;
-    [SerializeField] PlayerCam cam;
     public float killPoints;
     public float finalscore;
     public float timeLeft;
